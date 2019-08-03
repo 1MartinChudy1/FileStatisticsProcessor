@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TextFileStatisticProcessor
@@ -11,13 +12,14 @@ namespace TextFileStatisticProcessor
         {
             InputFileName = inputFileName;
             OutputFileName = outputFileName;
+            Worker = worker;
         }
 
         public string InputFileName { get; set; }
 
         public string OutputFileName { get; set; }
 
-        public BackgroundWorker worker { get; set; }
+        public BackgroundWorker Worker { get; set; }
 
         public virtual void EngageOperation()
         { }
@@ -28,16 +30,24 @@ namespace TextFileStatisticProcessor
             using (StreamReader sr = new StreamReader(InputFileName))
             {
                 fileContents = sr.ReadToEnd();
-            }   
-            
+            }
             return fileContents;
         }
 
+        
+
         protected void WriteProcessedContent(string content)
         {
+            double percentage;
             using (StreamWriter sw = new StreamWriter(OutputFileName))
             {
-                sw.Write(content);
+                for (int i = 0; i < content.Length; i++)
+                {
+                    sw.Write(content[i]);
+                    percentage = ((double)(i+1) / (double)content.Length) * 100;
+                    Worker.ReportProgress((int)percentage);
+                    Thread.Sleep(1);
+                }
             }
         }
     }

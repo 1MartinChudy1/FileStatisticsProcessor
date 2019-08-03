@@ -23,23 +23,35 @@ namespace TextFileStatisticProcessor
             InitializeComponent();
             worker.WorkerSupportsCancellation = true;
             worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork(); 
-
-            worker.ProgressChanged += Worker_ProgressChanged();
+            worker.DoWork += Worker_DoWork; 
+            worker.ProgressChanged += Worker_ProgressChanged;
         }
 
-        private DoWorkEventHandler Worker_DoWork()
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            IOperation operation = new Copy(inputFile, outputFile, worker);
+            operation.EngageOperation();
         }
 
-        private ProgressChangedEventHandler Worker_ProgressChanged()
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            progressBar1.Value = e.ProgressPercentage;
+            progressBar1.CreateGraphics().DrawString(e.ProgressPercentage.ToString() + "%",
+                new Font("Arial", (float)8.25, FontStyle.Regular),
+                Brushes.Black,
+                new PointF(progressBar1.Width / 2 - 10, progressBar1.Height / 2 - 7));
+
+            if (progressBar1.Value == 100)
+            {
+                progressBar1.Value = 0;
+                MessageBox.Show("Operation completed successfuly");
+                percentageLabel.Text = string.Empty;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            copyButton.Enabled = true;
         }
 
         private void selectInputButton_Click(object sender, EventArgs e)
@@ -84,8 +96,7 @@ namespace TextFileStatisticProcessor
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-            IOperation operation = new Copy(inputFile, outputFile, worker);
-            operation.EngageOperation();
+            worker.RunWorkerAsync();
         }
 
         private void OmitDiacriticsButton_Click(object sender, EventArgs e)
