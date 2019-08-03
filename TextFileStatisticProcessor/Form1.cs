@@ -23,14 +23,7 @@ namespace TextFileStatisticProcessor
             InitializeComponent();
             worker.WorkerSupportsCancellation = true;
             worker.WorkerReportsProgress = true;
-            worker.DoWork += Worker_DoWork; 
             worker.ProgressChanged += Worker_ProgressChanged;
-        }
-
-        private void Worker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            IOperation operation = new Copy(inputFile, outputFile, worker);
-            operation.EngageOperation();
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -96,7 +89,8 @@ namespace TextFileStatisticProcessor
 
         private void CopyButton_Click(object sender, EventArgs e)
         {
-            worker.RunWorkerAsync();
+            IOperation operation = new Copy(inputFile, outputFile, worker);
+            operation.EngageOperation();
         }
 
         private void OmitDiacriticsButton_Click(object sender, EventArgs e)
