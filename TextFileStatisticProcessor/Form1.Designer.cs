@@ -43,14 +43,15 @@
             this.rowCountValue = new System.Windows.Forms.Label();
             this.selectInputButton = new System.Windows.Forms.Button();
             this.selectOutputButton = new System.Windows.Forms.Button();
+            this.percentageLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // copyButton
             // 
             this.copyButton.Enabled = false;
-            this.copyButton.Location = new System.Drawing.Point(288, 31);
+            this.copyButton.Location = new System.Drawing.Point(264, 31);
             this.copyButton.Name = "copyButton";
-            this.copyButton.Size = new System.Drawing.Size(170, 23);
+            this.copyButton.Size = new System.Drawing.Size(194, 23);
             this.copyButton.TabIndex = 0;
             this.copyButton.Text = "Copy";
             this.copyButton.UseVisualStyleBackColor = true;
@@ -59,9 +60,9 @@
             // omitDiacriticsButton
             // 
             this.omitDiacriticsButton.Enabled = false;
-            this.omitDiacriticsButton.Location = new System.Drawing.Point(288, 60);
+            this.omitDiacriticsButton.Location = new System.Drawing.Point(264, 60);
             this.omitDiacriticsButton.Name = "omitDiacriticsButton";
-            this.omitDiacriticsButton.Size = new System.Drawing.Size(170, 23);
+            this.omitDiacriticsButton.Size = new System.Drawing.Size(194, 23);
             this.omitDiacriticsButton.TabIndex = 1;
             this.omitDiacriticsButton.Text = "Omit diacritics";
             this.omitDiacriticsButton.UseVisualStyleBackColor = true;
@@ -70,9 +71,9 @@
             // omitEmptyLines
             // 
             this.omitEmptyLines.Enabled = false;
-            this.omitEmptyLines.Location = new System.Drawing.Point(288, 89);
+            this.omitEmptyLines.Location = new System.Drawing.Point(264, 89);
             this.omitEmptyLines.Name = "omitEmptyLines";
-            this.omitEmptyLines.Size = new System.Drawing.Size(170, 23);
+            this.omitEmptyLines.Size = new System.Drawing.Size(194, 23);
             this.omitEmptyLines.TabIndex = 2;
             this.omitEmptyLines.Text = "Omit empty lines";
             this.omitEmptyLines.UseVisualStyleBackColor = true;
@@ -81,9 +82,9 @@
             // omitSpacesAndInterpunctionButton
             // 
             this.omitSpacesAndInterpunctionButton.Enabled = false;
-            this.omitSpacesAndInterpunctionButton.Location = new System.Drawing.Point(288, 118);
+            this.omitSpacesAndInterpunctionButton.Location = new System.Drawing.Point(264, 118);
             this.omitSpacesAndInterpunctionButton.Name = "omitSpacesAndInterpunctionButton";
-            this.omitSpacesAndInterpunctionButton.Size = new System.Drawing.Size(170, 23);
+            this.omitSpacesAndInterpunctionButton.Size = new System.Drawing.Size(194, 23);
             this.omitSpacesAndInterpunctionButton.TabIndex = 3;
             this.omitSpacesAndInterpunctionButton.Text = "Omit spaces and interpunction";
             this.omitSpacesAndInterpunctionButton.UseVisualStyleBackColor = true;
@@ -91,9 +92,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(61, 162);
+            this.progressBar1.Location = new System.Drawing.Point(61, 167);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(397, 23);
+            this.progressBar1.Size = new System.Drawing.Size(342, 13);
             this.progressBar1.TabIndex = 4;
             // 
             // sentenceCountText
@@ -170,9 +171,9 @@
             // 
             // selectInputButton
             // 
-            this.selectInputButton.Location = new System.Drawing.Point(72, 31);
+            this.selectInputButton.Location = new System.Drawing.Point(61, 31);
             this.selectInputButton.Name = "selectInputButton";
-            this.selectInputButton.Size = new System.Drawing.Size(166, 23);
+            this.selectInputButton.Size = new System.Drawing.Size(173, 52);
             this.selectInputButton.TabIndex = 14;
             this.selectInputButton.Text = "Select input file";
             this.selectInputButton.UseVisualStyleBackColor = true;
@@ -180,13 +181,21 @@
             // 
             // selectOutputButton
             // 
-            this.selectOutputButton.Location = new System.Drawing.Point(72, 89);
+            this.selectOutputButton.Location = new System.Drawing.Point(61, 89);
             this.selectOutputButton.Name = "selectOutputButton";
-            this.selectOutputButton.Size = new System.Drawing.Size(166, 23);
+            this.selectOutputButton.Size = new System.Drawing.Size(173, 52);
             this.selectOutputButton.TabIndex = 15;
             this.selectOutputButton.Text = "Select output file";
             this.selectOutputButton.UseVisualStyleBackColor = true;
             this.selectOutputButton.Click += new System.EventHandler(this.selectOutputButton_Click);
+            // 
+            // percentageLabel
+            // 
+            this.percentageLabel.AutoSize = true;
+            this.percentageLabel.Location = new System.Drawing.Point(425, 167);
+            this.percentageLabel.Name = "percentageLabel";
+            this.percentageLabel.Size = new System.Drawing.Size(0, 13);
+            this.percentageLabel.TabIndex = 16;
             // 
             // Form1
             // 
@@ -194,6 +203,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(529, 344);
+            this.Controls.Add(this.percentageLabel);
             this.Controls.Add(this.selectOutputButton);
             this.Controls.Add(this.selectInputButton);
             this.Controls.Add(this.rowCountValue);
@@ -209,6 +219,7 @@
             this.Controls.Add(this.omitEmptyLines);
             this.Controls.Add(this.omitDiacriticsButton);
             this.Controls.Add(this.copyButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
@@ -236,6 +247,7 @@
         private System.Windows.Forms.Label rowCountValue;
         private System.Windows.Forms.Button selectInputButton;
         private System.Windows.Forms.Button selectOutputButton;
+        private System.Windows.Forms.Label percentageLabel;
     }
 }
 

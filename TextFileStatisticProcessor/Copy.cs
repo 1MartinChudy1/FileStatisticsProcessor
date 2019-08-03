@@ -1,8 +1,10 @@
-﻿namespace TextFileStatisticProcessor
+﻿using System.ComponentModel;
+
+namespace TextFileStatisticProcessor
 {
     public class Copy : Operation
     {
-        public Copy(string inputFileName, string outputFileName) : base(inputFileName, outputFileName)
+        public Copy(string inputFileName, string outputFileName, BackgroundWorker worker) : base(inputFileName, outputFileName, worker)
         {
 
         }

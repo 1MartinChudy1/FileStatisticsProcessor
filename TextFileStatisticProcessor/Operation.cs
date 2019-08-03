@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 
@@ -6,7 +7,7 @@ namespace TextFileStatisticProcessor
 {
     public class Operation : IOperation
     {
-        public Operation(string inputFileName, string outputFileName)
+        public Operation(string inputFileName, string outputFileName, BackgroundWorker worker)
         {
             InputFileName = inputFileName;
             OutputFileName = outputFileName;
@@ -15,6 +16,8 @@ namespace TextFileStatisticProcessor
         public string InputFileName { get; set; }
 
         public string OutputFileName { get; set; }
+
+        public BackgroundWorker worker { get; set; }
 
         public virtual void EngageOperation()
         { }

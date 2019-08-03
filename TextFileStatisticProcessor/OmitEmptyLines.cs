@@ -1,11 +1,11 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.Text;
 
 namespace TextFileStatisticProcessor
 {
     public class OmitEmptyLines : Operation
     {
-        public OmitEmptyLines(string inputFileName, string outputFileName) : base(inputFileName, outputFileName)
+        public OmitEmptyLines(string inputFileName, string outputFileName, BackgroundWorker worker) : base(inputFileName, outputFileName, worker)
         {
         }
 

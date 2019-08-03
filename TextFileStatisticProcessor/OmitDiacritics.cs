@@ -1,11 +1,12 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel;
+using System.Globalization;
 using System.Text;
 
 namespace TextFileStatisticProcessor
 {
     public class OmitDiacritics : Operation
     {
-        public OmitDiacritics(string inputFileName, string outputFileName) : base(inputFileName, outputFileName)
+        public OmitDiacritics(string inputFileName, string outputFileName, BackgroundWorker worker) : base(inputFileName, outputFileName, worker)
         {
         }
 
