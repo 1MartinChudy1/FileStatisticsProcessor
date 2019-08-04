@@ -7,7 +7,10 @@ namespace TextFileStatisticProcessor
     {
         public OmitEmptyLines(string inputFileName, string outputFileName, BackgroundWorker worker) : base(inputFileName, outputFileName, worker)
         {
+            Diagnostic = this.Diagnostic;
         }
+
+        public new FileDiagnostic Diagnostic { get; set; }
 
         public override void EngageOperation()
         {

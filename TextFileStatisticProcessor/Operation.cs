@@ -21,6 +21,8 @@ namespace TextFileStatisticProcessor
 
         public BackgroundWorker Worker { get; set; }
 
+        public FileDiagnostic Diagnostic { get; set; }
+
         public virtual void EngageOperation()
         { }
 
@@ -34,8 +36,6 @@ namespace TextFileStatisticProcessor
             return fileContents;
         }
 
-        
-
         protected void WriteProcessedContent(string content)
         {
             double percentage;
@@ -44,11 +44,20 @@ namespace TextFileStatisticProcessor
                 for (int i = 0; i < content.Length; i++)
                 {
                     sw.Write(content[i]);
-                    percentage = ((double)(i+1) / (double)content.Length) * 100;
+                    percentage = ((double)(i + 1) / (double)content.Length) * 100;
                     Worker.ReportProgress((int)percentage);
                     Thread.Sleep(1);
                 }
             }
+
+            DiagnoseResult();
+        }
+
+        public void DiagnoseResult()
+        {
+            FileDiagnostic diagnostic = new FileDiagnostic();
+            diagnostic.DiagnoseFile(OutputFileName);
+            Diagnostic = diagnostic;
         }
     }
 }

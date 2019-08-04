@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AllowedTypes.cs" />
     <Compile Include="Copy.cs" />
+    <Compile Include="FileDiagnostic.cs" />
     <Compile Include="IOperation.cs" />
     <Compile Include="OmitDiacritics.cs" />
     <Compile Include="OmitEmptyLines.cs" />

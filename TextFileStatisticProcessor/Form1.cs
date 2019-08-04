@@ -37,7 +37,6 @@ namespace TextFileStatisticProcessor
             if (progressBar1.Value == 100)
             {
                 progressBar1.Value = 0;
-                MessageBox.Show("Operation completed successfuly");
                 percentageLabel.Text = string.Empty;
             }
         }
@@ -91,24 +90,36 @@ namespace TextFileStatisticProcessor
         {
             IOperation operation = new Copy(inputFile, outputFile, worker);
             operation.EngageOperation();
+            SetDiagnosticResults(operation.Diagnostic);
         }
 
         private void OmitDiacriticsButton_Click(object sender, EventArgs e)
         {
             IOperation operation = new OmitDiacritics(inputFile, outputFile, worker);
             operation.EngageOperation();
+            SetDiagnosticResults(operation.Diagnostic);
         }
 
         private void OmitEmptyLines_Click(object sender, EventArgs e)
         {
             IOperation operation = new OmitEmptyLines(inputFile, outputFile, worker);
             operation.EngageOperation();
+            SetDiagnosticResults(operation.Diagnostic);
         }
 
         private void OmitSpacesAndInterpunctionButton_Click(object sender, EventArgs e)
         {
             IOperation operation = new OmitSpacesAndInterpunction(inputFile, outputFile, worker);
             operation.EngageOperation();
+            SetDiagnosticResults(operation.Diagnostic);
+        }
+
+        private void SetDiagnosticResults(FileDiagnostic diagnostic)
+        {
+            rowCountValue.Text = diagnostic.RowCount.ToString();
+            sentenceCountValue.Text = diagnostic.SentenceCount.ToString();
+            wordCountValue.Text = diagnostic.WordCount.ToString();
+            characterCountValue.Text = diagnostic.CharacterCount.ToString();
         }
     }
 }
