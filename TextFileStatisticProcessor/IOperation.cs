@@ -1,6 +1,6 @@
 ﻿namespace TextFileStatisticProcessor
 {
-    interface IOperation
+    public interface IOperation
     {
         string InputFileName { get; set; }
 

@@ -45,7 +45,7 @@ namespace TextFileStatisticProcessor
                 {
                     sw.Write(content[i]);
                     percentage = ((double)(i + 1) / (double)content.Length) * 100;
-                    Worker.ReportProgress((int)percentage);
+                    Worker?.ReportProgress((int)percentage);
                     Thread.Sleep(1);
                 }
             }
