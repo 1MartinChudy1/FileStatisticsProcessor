@@ -29,10 +29,13 @@ namespace TextFileStatisticProcessor
         private int GetSentenceCount(string content)
         {
             int counter = 0;
+            char previousCharacter = 'S';
             foreach (char c in content)
             {
-                if (c == '.' || c == '?' || c == '!')
+                if (IsSentenceEnding(c) && char.IsLetterOrDigit(previousCharacter))
                     counter++;
+
+                previousCharacter = c;
             }
 
             return counter;
@@ -71,5 +74,8 @@ namespace TextFileStatisticProcessor
 
             return wordCount;
         }
+
+        private bool IsSentenceEnding(char c)
+            => (c == '.' || c == '?' || c == '!');
     }
 }
