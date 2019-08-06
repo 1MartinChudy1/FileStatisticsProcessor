@@ -43,7 +43,6 @@ namespace TextFileStatisticProcessor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            copyButton.Enabled = true;
         }
 
         private void selectInputButton_Click(object sender, EventArgs e)
@@ -84,7 +83,7 @@ namespace TextFileStatisticProcessor
         }
 
         private bool IncorrectType(string fileName)
-            => new FileInfo(fileName).Extension.ContainsAny(Enum.GetNames(typeof(AllowedTypes))) ? false : true;
+            => !new FileInfo(fileName).Extension.ContainsAny(Enum.GetNames(typeof(AllowedTypes)));
 
         private void CopyButton_Click(object sender, EventArgs e)
         {

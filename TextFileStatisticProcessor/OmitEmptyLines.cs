@@ -21,14 +21,14 @@ namespace TextFileStatisticProcessor
 
         private string EngageOmitEmptyLines(string content)
         {
-            var splittedShit = content.Split('\n');
+            var splittedByLines = content.Split('\n');
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (string item in splittedShit)
+            foreach (string item in splittedByLines)
             {
                 if (item != "\r")
-                    sb.Append(item);
+                    sb.Append(item.Contains("\r") ? $"{item}\n" : item);
             }
 
             return sb.ToString();
