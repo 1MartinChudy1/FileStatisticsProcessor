@@ -1,0 +1,6 @@
+﻿Lorem ipsum je oznaceni pro standardni pseudolatinsky text uzivany v grafickem designu a navrhovani jako demonstrativni vyplnovy text pri vytvareni pracovnich ukazek grafickych navrhu. Lipsum tak pracovne znazornuje text v ukazkovych maketach predtim, nez bude do hotoveho navrhu vlozen smysluplny obsah.
+
+Pokud by se pro stejny ucel pouzil smysluplny text, bylo by tezke hodnotit pouze vzhled, aniz by se pozorovatel nechal svest ke cteni obsahu. Pokud by byl naopak pouzit nesmyslny, ale pravidelny text, oko by pri posuzovani vzhledu bylo vyrusovano pravidelnou strukturou textu, ktera se od bezneho textu lisi. Text lorem ipsum na prvni pohled pripomina bezny text, slova jsou ruzne dlouha, frekvence pismen je podobna bezne reci, interpunkce vypada prirozene atd.
+
+Klasicky text lorem ipsum:
+Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
