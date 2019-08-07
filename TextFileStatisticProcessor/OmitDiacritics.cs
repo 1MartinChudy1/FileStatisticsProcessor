@@ -6,10 +6,20 @@ namespace TextFileStatisticProcessor
 {
     public class OmitDiacritics : Operation
     {
+        /// <summary>
+        /// Omit diacritics operation constructor which inherits from Operation base class.
+        /// </summary>
+        /// <param name="inputFileName">Input file path</param>
+        /// <param name="outputFileName">Output file path</param>
+        /// <param name="worker">Background worker object</param>
         public OmitDiacritics(string inputFileName, string outputFileName, BackgroundWorker worker) : base(inputFileName, outputFileName, worker)
         {
         }
 
+        /// <summary>
+        /// Overriden method which gets the data from GetFileContents method and passes them
+        /// to EngageOmitDiacritics method and the result to WriteProcessedContent method
+        /// </summary>
         public override void EngageOperation()
         {
             string content = GetFileContents();
@@ -17,7 +27,12 @@ namespace TextFileStatisticProcessor
             WriteProcessedContent(result);
         }
 
-        public string EngageOmitDiacritics(string content)
+        /// <summary>
+        /// Method omits diacritics from the data from input file. 
+        /// </summary>
+        /// <param name="content">Content of the input file</param>
+        /// <returns>content from input file without diacritics</returns>
+        private string EngageOmitDiacritics(string content)
         {
             content = content.Normalize(NormalizationForm.FormD);
             StringBuilder sb = new StringBuilder();
