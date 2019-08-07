@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['engageoperation',['EngageOperation',['../class_text_file_statistic_processor_1_1_copy.html#a20d5a245a35463ea9397e9da8830d6dc',1,'TextFileStatisticProcessor.Copy.EngageOperation()'],['../class_text_file_statistic_processor_1_1_omit_diacritics.html#ad39c8e6a5ea0c2f423c1ed9f50d7eb68',1,'TextFileStatisticProcessor.OmitDiacritics.EngageOperation()'],['../class_text_file_statistic_processor_1_1_omit_empty_lines.html#a75134f4e7ec763859513911c4dbe63c2',1,'TextFileStatisticProcessor.OmitEmptyLines.EngageOperation()'],['../class_text_file_statistic_processor_1_1_omit_spaces_and_interpunction.html#af4546f1c30f4193afd1fcfe80a6c802b',1,'TextFileStatisticProcessor.OmitSpacesAndInterpunction.EngageOperation()'],['../class_text_file_statistic_processor_1_1_operation.html#a39df69b8c32970bbb36196e87d602347',1,'TextFileStatisticProcessor.Operation.EngageOperation()']]]
+];
