@@ -23,9 +23,16 @@ namespace TextFileStatisticProcessor
 
         public FileDiagnostic Diagnostic { get; set; }
 
+        /// <summary>
+        /// Method that is being overriden depending on the operation of choice
+        /// </summary>
         public virtual void EngageOperation()
         { }
 
+        /// <summary>
+        /// Gets the file contents as string from the input file
+        /// </summary>
+        /// <returns>string content of input file</returns>
         protected string GetFileContents()
         {
             string fileContents = string.Empty;
@@ -36,6 +43,10 @@ namespace TextFileStatisticProcessor
             return fileContents;
         }
 
+        /// <summary>
+        /// Method writes result string from operation to the desired output text file.
+        /// </summary>
+        /// <param name="content">Result string from one of the operations</param>
         protected void WriteProcessedContent(string content)
         {
             double percentage;
@@ -53,7 +64,11 @@ namespace TextFileStatisticProcessor
             DiagnoseResult();
         }
 
-        public void DiagnoseResult()
+        /// <summary>
+        /// Method calls diagnostic operation on the chosen operation and fills out
+        /// the object for writing down the result of diagnostic operations.
+        /// </summary>
+        private void DiagnoseResult()
         {
             FileDiagnostic diagnostic = new FileDiagnostic();
             diagnostic.DiagnoseFile(OutputFileName);
