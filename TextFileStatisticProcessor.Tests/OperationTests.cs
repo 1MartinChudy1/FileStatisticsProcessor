@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace TextFileStatisticProcessor.Tests
@@ -15,13 +16,13 @@ namespace TextFileStatisticProcessor.Tests
         private readonly string _omitSpacesAndInterpunctionResult = Path.GetFullPath("..\\..\\..\\TestFiles\\omitSpacesAndInterpunctionResult.txt");
 
         [Fact]
-        public void CopyTest()
+        public async void CopyTest()
         {
             // Arrange
             IOperation operation = new Copy(_inputFile, _outputFile, _worker);
             
             // Act
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
 
             // Assert
             string input = GetFileContent(_inputFile);
@@ -30,13 +31,13 @@ namespace TextFileStatisticProcessor.Tests
         }
 
         [Fact]
-        public void OmitDiacriticsTest()
+        public async void OmitDiacriticsTest()
         {
             // Arrange
             IOperation operation = new OmitDiacritics(_inputFile, _outputFile, _worker);
 
             // Act
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
 
             // Assert
             string output = GetFileContent(_outputFile);
@@ -45,13 +46,13 @@ namespace TextFileStatisticProcessor.Tests
         }
 
         [Fact]
-        public void OmitEmptyLines()
+        public async void OmitEmptyLines()
         {
             // Arrange
             IOperation operation = new OmitEmptyLines(_inputFile, _outputFile, _worker);
 
             // Act
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
 
             // Assert
             string output = GetFileContent(_outputFile);
@@ -60,13 +61,13 @@ namespace TextFileStatisticProcessor.Tests
         }
 
         [Fact]
-        public void OmitSpacesAndInterpunction()
+        public async void OmitSpacesAndInterpunction()
         {
             // Arrange
             IOperation operation = new OmitSpacesAndInterpunction(_inputFile, _outputFile, _worker);
-            
+
             // Act
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
 
             // Assert
             string output = GetFileContent(_outputFile);
@@ -94,7 +95,6 @@ namespace TextFileStatisticProcessor.Tests
             Assert.Equal(rowCount, diagnostic.RowCount);
             Assert.Equal(characterCount, diagnostic.CharacterCount);
         }
-
 
         private string GetFileContent(string path)
         {

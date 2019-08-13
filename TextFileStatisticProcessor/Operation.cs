@@ -46,6 +46,7 @@ namespace TextFileStatisticProcessor
                     stringArray.Add(fileContents + "\r\n");
                 }
             }
+            stringArray[stringArray.Count - 1] = stringArray[stringArray.Count - 1].Replace(Environment.NewLine, string.Empty);
             return stringArray.ToArray();
         }
 
@@ -55,7 +56,6 @@ namespace TextFileStatisticProcessor
         /// <param name="content">Result string from one of the operations</param>
         protected async Task WriteProcessedContent(string[] c)
         {
-            //var c = content.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             double percentage;
             int previousPercentage = 0;
             using (StreamWriter sw = new StreamWriter(OutputFileName))
