@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TextFileStatisticProcessor
 {
@@ -20,11 +22,11 @@ namespace TextFileStatisticProcessor
         /// Overriden method which gets the data from GetFileContents method and passes them
         /// to EngageOmitDiacritics method and the result to WriteProcessedContent method
         /// </summary>
-        public override void EngageOperation()
+        public override Task EngageOperation()
         {
-            string content = GetFileContents();
-            string result = EngageOmitDiacritics(content);
-            WriteProcessedContent(result);
+            string[] content = GetFileContents();
+            string[] result = EngageOmitDiacritics(content);
+            return WriteProcessedContent(result);
         }
 
         /// <summary>
@@ -32,20 +34,31 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="content">Content of the input file</param>
         /// <returns>content from input file without diacritics</returns>
-        private string EngageOmitDiacritics(string content)
+        private string[] EngageOmitDiacritics(string[] content)
         {
-            content = content.Normalize(NormalizationForm.FormD);
-            StringBuilder sb = new StringBuilder();
-
-            foreach (char character in content)
+            List<string> result = new List<string>();
+            int i = 0;
+            string liffs;
+            foreach (string line in content)
             {
-                if (CharUnicodeInfo.GetUnicodeCategory(character) != UnicodeCategory.NonSpacingMark)
-                {
-                    sb.Append(character);
-                }
+                liffs = line.Normalize(NormalizationForm.FormD);
             }
 
-            return sb.ToString();
+            foreach (string line in content)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (char character in line)
+                {
+
+                    if (CharUnicodeInfo.GetUnicodeCategory(character) != UnicodeCategory.NonSpacingMark)
+                    {
+                        sb.Append(character);
+                    }
+                }
+                result.Add(sb.ToString());
+            }
+
+            return result.ToArray();
         }
     }
 }

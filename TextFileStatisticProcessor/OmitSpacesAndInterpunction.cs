@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace TextFileStatisticProcessor
 {
@@ -21,11 +23,11 @@ namespace TextFileStatisticProcessor
         /// to EngageOmitSpacesAndInterpunction method and the result to WriteProcessedContent
         /// method
         /// </summary>
-        public override void EngageOperation()
+        public override Task EngageOperation()
         {
-            string content = GetFileContents();
-            string result = EngageOmitSpacesAndInterpunction(content);
-            WriteProcessedContent(result);
+            string[] content = GetFileContents();
+            string[] result = EngageOmitSpacesAndInterpunction(content);
+            return WriteProcessedContent(result);
         }
 
         /// <summary>
@@ -34,19 +36,27 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="content">Content of the input file</param>
         /// <returns>content from input file without empty spaces and interpuction in camel case format</returns>
-        private string EngageOmitSpacesAndInterpunction(string content)
+        private string[] EngageOmitSpacesAndInterpunction(string[] content)
         {
-            StringBuilder result = new StringBuilder();
-            _ = content.ToLower();
-            content = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(content);
+            int iterator = 0;
+            List<string> resultList = new List<string>();
+            
 
-            for (int i = 0; i < content.Length; i++)
+            foreach (string line in content)
             {
-                if (IsValidCharacter(content[i]))
-                    result.Append(content[i]);
+                StringBuilder result = new StringBuilder();
+                content[iterator] = line.ToLower();
+                content[iterator] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(line);
+                for (int i = 0; i < content.Length; i++)
+                {
+                    if (IsValidCharacter(line[i]))
+                        result.Append(line[i]);
+                }
+                iterator++;
+                resultList.Add(result.ToString());
             }
 
-            return result.ToString();
+            return resultList.ToArray();
         }
 
         /// <summary>

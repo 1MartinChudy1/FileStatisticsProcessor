@@ -25,6 +25,8 @@ namespace TextFileStatisticProcessor
             worker.ProgressChanged += Worker_ProgressChanged;
         }
 
+        delegate void SetPercentageCallback(int value);
+
         /// <summary>
         /// When the progress in operation occurs, this method sets the correct percentage value and
         /// progress to the progress bar in Form
@@ -33,23 +35,36 @@ namespace TextFileStatisticProcessor
         /// <param name="e">Background worker progress changed events</param>
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
-            progressBar1.CreateGraphics().DrawString(e.ProgressPercentage.ToString() + "%",
-                new Font("Arial", (float)8.25, FontStyle.Regular),
-                Brushes.Black,
-                new PointF(progressBar1.Width / 2 - 10, progressBar1.Height / 2 - 7));
-
-            if (progressBar1.Value == 100)
-            {
-                progressBar1.Value = 0;
-                percentageLabel.Text = string.Empty;
-            }
+            SetPercentage(e.ProgressPercentage);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
         }
 
+        private void SetPercentage(int value)
+        {
+            if (this.progressBar1.InvokeRequired)
+            {
+                SetPercentageCallback d = new SetPercentageCallback(SetPercentage);
+                this.Invoke(d, new object[] { value });
+            }
+            else
+            {
+                progressBar1.Value = value;
+                progressBar1.CreateGraphics().DrawString(value.ToString() + "%",
+                    new Font("Arial", (float)8.25, FontStyle.Regular),
+                    Brushes.Black,
+                    new PointF(progressBar1.Width / 2 - 10, progressBar1.Height / 2 - 7));
+
+
+                if (progressBar1.Value == 100)
+                {
+                    progressBar1.Value = 0;
+                    percentageLabel.Text = string.Empty;
+                }
+            }
+        }
         
         /// <summary>
         /// Method registers click on the input button, opens a window with an option to select file
@@ -105,6 +120,18 @@ namespace TextFileStatisticProcessor
                 omitDiacriticsButton.Enabled = true;
             }
         }
+
+        private void DisableControls(bool disable = true)
+        {
+            copyButton.Enabled = !disable;
+            copyButton.Refresh();
+            omitEmptyLines.Enabled = !disable;
+            omitEmptyLines.Refresh();
+            omitSpacesAndInterpunctionButton.Enabled = !disable;
+            omitSpacesAndInterpunctionButton.Refresh();
+            omitDiacriticsButton.Enabled = !disable;
+            omitDiacriticsButton.Refresh();
+        }
         
         /// <summary>
         /// Checks whether file is of supported type.
@@ -119,11 +146,13 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CopyButton_Click(object sender, EventArgs e)
+        private async void CopyButton_Click(object sender, EventArgs e)
         {
+            DisableControls();
             IOperation operation = new Copy(inputFile, outputFile, worker);
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
             SetDiagnosticResults(operation.Diagnostic);
+            DisableControls(false);
         }
 
         /// <summary>
@@ -131,11 +160,13 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="sender">button object</param>
         /// <param name="e">button parameter event arguments</param>
-        private void OmitDiacriticsButton_Click(object sender, EventArgs e)
+        private async void OmitDiacriticsButton_Click(object sender, EventArgs e)
         {
+            DisableControls();
             IOperation operation = new OmitDiacritics(inputFile, outputFile, worker);
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
             SetDiagnosticResults(operation.Diagnostic);
+            DisableControls(false);
         }
 
         /// <summary>
@@ -143,11 +174,13 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="sender">button object</param>
         /// <param name="e">button parameter event arguments</param>
-        private void OmitEmptyLines_Click(object sender, EventArgs e)
+        private async void OmitEmptyLines_Click(object sender, EventArgs e)
         {
+            DisableControls();
             IOperation operation = new OmitEmptyLines(inputFile, outputFile, worker);
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
             SetDiagnosticResults(operation.Diagnostic);
+            DisableControls(false);
         }
 
         /// <summary>
@@ -155,11 +188,13 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="sender">button object</param>
         /// <param name="e">button parameter event arguments</param>
-        private void OmitSpacesAndInterpunctionButton_Click(object sender, EventArgs e)
+        private async void OmitSpacesAndInterpunctionButton_Click(object sender, EventArgs e)
         {
+            DisableControls();
             IOperation operation = new OmitSpacesAndInterpunction(inputFile, outputFile, worker);
-            operation.EngageOperation();
+            await Task.Run(() => operation.EngageOperation());
             SetDiagnosticResults(operation.Diagnostic);
+            DisableControls(false);
         }
 
 
