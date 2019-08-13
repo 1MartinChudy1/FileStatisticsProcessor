@@ -38,21 +38,19 @@ namespace TextFileStatisticProcessor
         /// <returns>content from input file without empty spaces and interpuction in camel case format</returns>
         private string[] EngageOmitSpacesAndInterpunction(string[] content)
         {
-            int iterator = 0;
             List<string> resultList = new List<string>();
-            
 
             foreach (string line in content)
             {
+                string tmp;
                 StringBuilder result = new StringBuilder();
-                content[iterator] = line.ToLower();
-                content[iterator] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(line);
-                for (int i = 0; i < content.Length; i++)
+                tmp = line.ToLower();
+                tmp = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(line);
+                for (int i = 0; i < tmp.Length; i++)
                 {
-                    if (IsValidCharacter(line[i]))
-                        result.Append(line[i]);
+                    if (IsValidCharacter(tmp[i]))
+                        result.Append(tmp[i]);
                 }
-                iterator++;
                 resultList.Add(result.ToString());
             }
 
