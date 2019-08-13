@@ -23,6 +23,7 @@ namespace TextFileStatisticProcessor
         /// to EngageOmitSpacesAndInterpunction method and the result to WriteProcessedContent
         /// method
         /// </summary>
+        /// <returns>task object</returns>
         public override Task EngageOperation()
         {
             string[] content = GetFileContents();

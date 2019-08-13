@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TextFileStatisticProcessor
 {
@@ -28,6 +26,7 @@ namespace TextFileStatisticProcessor
         /// <summary>
         /// Method that is being overriden depending on the operation of choice
         /// </summary>
+        /// <returns>task object</returns>
         public virtual Task EngageOperation()
         { return Task.CompletedTask; }
 

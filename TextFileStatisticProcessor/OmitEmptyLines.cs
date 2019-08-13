@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TextFileStatisticProcessor
@@ -16,11 +15,12 @@ namespace TextFileStatisticProcessor
         public OmitEmptyLines(string inputFileName, string outputFileName, BackgroundWorker worker) : base(inputFileName, outputFileName, worker)
         {
         }
-        
+
         /// <summary>
         /// Overriden method which gets the data from GetFileContents method and passes them
         /// to EngageOmitEmptyLines method and the result to WriteProcessedContent method
         /// </summary>
+        /// <returns>task object</returns>
         public override Task EngageOperation()
         {
             string[] content = GetFileContents();

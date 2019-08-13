@@ -20,6 +20,7 @@ namespace TextFileStatisticProcessor
         /// Overriden method which gets the data from GetFileContents method and passes them
         /// to WriteProcessedContent method
         /// </summary>
+        /// <returns>task object</returns>
         public override Task EngageOperation()
         {
             var content = GetFileContents();
