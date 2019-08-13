@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace TextFileStatisticProcessor
 {
@@ -19,10 +20,11 @@ namespace TextFileStatisticProcessor
         /// Overriden method which gets the data from GetFileContents method and passes them
         /// to WriteProcessedContent method
         /// </summary>
-        public override void EngageOperation()
+        /// <returns>task object</returns>
+        public override Task EngageOperation()
         {
             var content = GetFileContents();
-            WriteProcessedContent(content);
+            return WriteProcessedContent(content);
         }
     }
 }

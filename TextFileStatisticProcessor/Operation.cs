@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Threading;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace TextFileStatisticProcessor
 {
@@ -26,39 +26,52 @@ namespace TextFileStatisticProcessor
         /// <summary>
         /// Method that is being overriden depending on the operation of choice
         /// </summary>
-        public virtual void EngageOperation()
-        { }
+        /// <returns>task object</returns>
+        public virtual Task EngageOperation()
+        { return Task.CompletedTask; }
 
         /// <summary>
         /// Gets the file contents as string from the input file
         /// </summary>
         /// <returns>string content of input file</returns>
-        protected string GetFileContents()
+        protected string[] GetFileContents()
         {
             string fileContents = string.Empty;
+            List<string> stringArray = new List<string>();
             using (StreamReader sr = new StreamReader(InputFileName))
             {
-                fileContents = sr.ReadToEnd();
+                while ((fileContents = sr.ReadLine()) != null)
+                {
+                    stringArray.Add(fileContents + "\r\n");
+                }
             }
-            return fileContents;
+            stringArray[stringArray.Count - 1] = stringArray[stringArray.Count - 1].Replace(Environment.NewLine, string.Empty);
+            return stringArray.ToArray();
         }
 
         /// <summary>
         /// Method writes result string from operation to the desired output text file.
         /// </summary>
         /// <param name="content">Result string from one of the operations</param>
-        protected void WriteProcessedContent(string content)
+        protected async Task WriteProcessedContent(string[] c)
         {
             double percentage;
+            int previousPercentage = 0;
             using (StreamWriter sw = new StreamWriter(OutputFileName))
             {
-                for (int i = 0; i < content.Length; i++)
+                await Task.Run((Action)(() =>
                 {
-                    sw.Write(content[i]);
-                    percentage = ((double)(i + 1) / (double)content.Length) * 100;
-                    Worker?.ReportProgress((int)percentage);
-                    Thread.Sleep(1);
-                }
+                    for (int i = 0; i < c.Length; i++)
+                    {
+                        sw.Write(c[i]);
+                        percentage = ((double)(i + 1) / (double)c.Length) * 100;
+                        if ((int)percentage > previousPercentage)
+                        {
+                            Worker?.ReportProgress((int)percentage);
+                            previousPercentage++;
+                        }
+                    }
+                }));
             }
 
             DiagnoseResult();

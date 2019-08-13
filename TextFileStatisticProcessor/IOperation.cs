@@ -1,4 +1,6 @@
-﻿namespace TextFileStatisticProcessor
+﻿using System.Threading.Tasks;
+
+namespace TextFileStatisticProcessor
 {
     public interface IOperation
     {
@@ -7,6 +9,6 @@
         string OutputFileName { get; set; }
         FileDiagnostic Diagnostic { get; set; }
 
-        void EngageOperation();
+        Task EngageOperation();
     }
 }
