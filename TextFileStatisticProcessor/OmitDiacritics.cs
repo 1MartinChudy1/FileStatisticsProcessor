@@ -36,15 +36,30 @@ namespace TextFileStatisticProcessor
         /// <returns>content from input file without diacritics</returns>
         private string[] EngageOmitDiacritics(string[] content)
         {
+            //var smtng = content[0].Normalize(NormalizationForm.FormD);
+            //StringBuilder sb = new StringBuilder();
+
+            //foreach (char character in content)
+            //{
+            //    if (CharUnicodeInfo.GetUnicodeCategory(character) != UnicodeCategory.NonSpacingMark)
+            //    {
+            //        sb.Append(character);
+            //    }
+            //}
+
+            //return sb.ToString();
+
+
             List<string> result = new List<string>();
+            List<string> changedFormat = new List<string>();
             int i = 0;
             string liffs;
             foreach (string line in content)
             {
-                liffs = line.Normalize(NormalizationForm.FormD);
+                changedFormat.Add(line.Normalize(NormalizationForm.FormD));
             }
 
-            foreach (string line in content)
+            foreach (string line in changedFormat.ToArray())
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (char character in line)
