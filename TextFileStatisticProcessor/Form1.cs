@@ -28,8 +28,8 @@ namespace TextFileStatisticProcessor
         delegate void SetPercentageCallback(int value);
 
         /// <summary>
-        /// When the progress in operation occurs, this method sets the correct percentage value and
-        /// progress to the progress bar in Form
+        /// When the progress in operation occurs, this method calls set percentage method with
+        /// the correct percentage value
         /// </summary>
         /// <param name="sender">Background worker object</param>
         /// <param name="e">Background worker progress changed events</param>
@@ -42,6 +42,10 @@ namespace TextFileStatisticProcessor
         {
         }
 
+        /// <summary>
+        /// Method sets value to progress bar.
+        /// </summary>
+        /// <param name="value">integer value of percentage</param>
         private void SetPercentage(int value)
         {
             if (this.progressBar1.InvokeRequired)
@@ -83,7 +87,7 @@ namespace TextFileStatisticProcessor
                     throw new Exception("Incorrect file type.");
             }
 
-            EnableControls();
+            DisableControls(inputFile == string.Empty || outputFile == string.Empty);
         }
 
         /// <summary>
@@ -103,24 +107,13 @@ namespace TextFileStatisticProcessor
                     throw new Exception("Incorrect file type.");
             }
 
-            EnableControls();
+            DisableControls(inputFile == string.Empty || outputFile == string.Empty);
         }
 
         /// <summary>
-        /// Method checks if input and output file paths are set.
-        /// If they are, Buttons for operations are enabled.
+        /// Method either enables or disables the buttons for operations depending on parameter.
         /// </summary>
-        private void EnableControls()
-        {
-            if (inputFile != string.Empty && outputFile != string.Empty)
-            {
-                copyButton.Enabled = true;
-                omitEmptyLines.Enabled = true;
-                omitSpacesAndInterpunctionButton.Enabled = true;
-                omitDiacriticsButton.Enabled = true;
-            }
-        }
-
+        /// <param name="disable">bool parameter which says if the buttons should be </param>
         private void DisableControls(bool disable = true)
         {
             copyButton.Enabled = !disable;
