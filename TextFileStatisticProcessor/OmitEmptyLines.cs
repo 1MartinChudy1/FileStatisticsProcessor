@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +24,8 @@ namespace TextFileStatisticProcessor
         public override Task EngageOperation()
         {
             string[] content = GetFileContents();
-            //string[] result = EngageOmitEmptyLines(content);
-            //return WriteProcessedContent(result);
-            return Task.CompletedTask;
+            string[] result = EngageOmitEmptyLines(content);
+            return WriteProcessedContent(result);
         }
         
         /// <summary>
@@ -33,17 +33,16 @@ namespace TextFileStatisticProcessor
         /// </summary>
         /// <param name="content">Content of the input file</param>
         /// <returns>content from input file empty lines</returns>
-        private string EngageOmitEmptyLines(string[] content)
+        private string[] EngageOmitEmptyLines(string[] content)
         {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (string item in content)
+            List<string> result = new List<string>();
+            foreach (string line in content)
             {
-                if (item != "\r")
-                    sb.Append(item.Contains("\r") ? $"{item}\n" : item);
+                if (line == "\r\n")
+                    continue;
+                result.Add(line);
             }
-
-            return sb.ToString();
+            return result.ToArray();
         }
     }
 }
