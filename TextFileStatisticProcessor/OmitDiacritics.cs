@@ -38,8 +38,6 @@ namespace TextFileStatisticProcessor
         {
             List<string> result = new List<string>();
             List<string> changedFormat = new List<string>();
-            int i = 0;
-            string liffs;
             foreach (string line in content)
             {
                 changedFormat.Add(line.Normalize(NormalizationForm.FormD));
